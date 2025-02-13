@@ -11,20 +11,36 @@ aritfact_download(){
   cd /app
   unzip /tmp/$component.zip
 }
-
+app_prereq(){
+  useradd roboshop
+  cp $component.service /etc/systemd/system/$component.service
+}
 nodejs_app_setup(){
-dnf module disable nodejs -y
-dnf module enable nodejs:20 -y
-dnf install nodejs -y
+  dnf module disable nodejs -y
+  dnf module enable nodejs:20 -y
+  dnf install nodejs -y
+  app_prereq
+  aritfact_download
+  cd /app
+  npm install
+  systemd_setup
+}
 
-useradd roboshop
+maven_app_setup(){
+  dnf install maven -y
+  app_prereq
+  aritfact_download
+  cd /app
+  mvn clean package
+  mv target/$component-1.0.jar $component.jar
+  systemd_setup
+}
 
-cp $component.service /etc/systemd/system/$component.service
-
-aritfact_download
-
-cd /app
-npm install
-
-systemd_setup
+python_app_setup(){
+  dnf install python3 gcc python3-devel -y
+  app_prereq
+  aritfact_download
+  cd /app
+  pip3 install -r requirements.txt
+  systemd_setup
 }
