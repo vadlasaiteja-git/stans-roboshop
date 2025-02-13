@@ -16,7 +16,7 @@ print_head Download App content
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
 cd /usr/share/nginx/html
 print_head Extract app content
-print_head unzip /tmp/frontend.zip
+unzip /tmp/frontend.zip
 print_head Start Nginx Service
 systemctl enable nginx
 systemctl restart nginx
