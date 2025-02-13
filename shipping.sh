@@ -7,13 +7,7 @@ useradd roboshop
 cp shipping.service /etc/systemd/system/shipping.service
 
 
-rm -rf /app
-mkdir /app
-
-
-curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip
-cd /app
-unzip /tmp/shipping.zip
+aritfact_download
 
 cd /app
 mvn clean package
