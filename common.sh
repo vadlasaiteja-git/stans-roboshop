@@ -55,3 +55,4 @@ go_app_setup(){
   go build
   systemd_setup
 }
+
