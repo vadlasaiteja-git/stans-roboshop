@@ -11,3 +11,20 @@ aritfact_download(){
   cd /app
   unzip /tmp/$component.zip
 }
+
+nodejs_app_setup(){
+dnf module disable nodejs -y
+dnf module enable nodejs:20 -y
+dnf install nodejs -y
+
+useradd roboshop
+
+cp $component.service /etc/systemd/system/$component.service
+
+aritfact_download
+
+cd /app
+npm install
+
+systemd_setup
+}
