@@ -1,5 +1,5 @@
 print_head(){
-  echo -e "\e[34m$*\e[0m"
+  echo -e "\e[32m$*\e[0m"
 }
 
 print_head Disable Default Nginx
@@ -17,6 +17,6 @@ curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v
 cd /usr/share/nginx/html
 print_head Extract app content
 print_head unzip /tmp/frontend.zip
-Start Nginx Service
-print_head systemctl enable nginx
-print_head systemctl restart nginx
+print_head Start Nginx Service
+systemctl enable nginx
+systemctl restart nginx
