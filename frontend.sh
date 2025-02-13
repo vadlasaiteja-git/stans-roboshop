@@ -1,9 +1,4 @@
-print_head(){
-  echo -e "\e[32m$*\e[0m"
-}
-log_file=/tmp/roboshop.log
-rm -f $log_file
-
+source common.sh
 print_head Disable Default Nginx
 dnf module disable nginx -y >> $log_file
 print_head Enable Nginx 24
