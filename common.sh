@@ -44,3 +44,14 @@ python_app_setup(){
   pip3 install -r requirements.txt
   systemd_setup
 }
+
+go_app_setup(){
+  dnf install golang -y
+  app_prereq
+  aritfact_download
+  cd /app
+  go mod init $component
+  go get
+  go build
+  systemd_setup
+}
