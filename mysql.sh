@@ -10,3 +10,4 @@ systemctl start mysqld &>>$log_file
 echo $?
 print_head Setup Root Password
 mysql_secure_installation --set-root-pass RoboShop@1 &>>$log_file
+echo $?
