@@ -10,27 +10,27 @@ echo $?
 
 print_head Install Nginx
 dnf install nginx -y &>> $log_file
-echo $?
+exit_status_print $?
 
 print_head Copy Nginx Config file
 cp nginx.conf /etc/nginx/nginx.conf &>> $log_file
-echo $?
+exit_status_print $?
 
 print_head Clean Old Content
 rm -rf /usr/share/nginx/html/* &>> $log_file
-echo $?
+exit_status_print $?
 
 print_head Download App content
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip &>> $log_file
-echo $?
+exit_status_print $?
 
 cd /usr/share/nginx/html
 
 print_head Extract app content
 unzip /tmp/frontend.zip &>> $log_file
-echo $?
+exit_status_print $?
 
 print_head Start Nginx Service
 systemctl enable nginx &>> $log_file
 systemctl restart nginx &>> $log_file
-echo $?
+exit_status_print $?
