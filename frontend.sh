@@ -2,11 +2,11 @@ source common.sh
 
 print_head Disable Default Nginx
 dnf module disable nginx -y &>> $log_file
-echo $?
+exit_status_print $?
 
 print_head Enable Nginx 24
 dnf module enable nginx:1.24 -y &>> $log_file
-echo $?
+exit_status_print $?
 
 print_head Install Nginx
 dnf install nginx -y &>> $log_file
