@@ -12,7 +12,10 @@ systemd_setup(){
 
 aritfact_download(){
   print_head Add Application User
-  useradd roboshop &>>$log_file
+  id roboshop &>>$log_file
+  if [ $? -ne 0 ]; then
+    useradd roboshop &>>$log_file
+  fi
   exit_status_print $?
 
   print_head Remove existing application code
