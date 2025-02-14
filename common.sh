@@ -1,4 +1,7 @@
 systemd_setup(){
+  print_head Copy SystemD service file
+  cp $component.service /etc/systemd/system/$component.service
+
   print_head Start Service
   systemctl daemon-reload
   systemctl enable $component
@@ -6,6 +9,9 @@ systemd_setup(){
 }
 
 aritfact_download(){
+  print_head Add Application User
+  useradd roboshop
+
   print_head Remove existing application code
   rm -rf /app
 
@@ -19,13 +25,7 @@ aritfact_download(){
   print_head Extract Application Content
   unzip /tmp/$component.zip
 }
-app_prereq(){
-  print_head Add Application User
-  useradd roboshop
 
-  print_head Copy SystemD service file
-  cp $component.service /etc/systemd/system/$component.service
-}
 nodejs_app_setup(){
   print_head Disable NodeJS default version
   dnf module disable nodejs -y
@@ -36,7 +36,7 @@ nodejs_app_setup(){
   print_head Install NodeJS
   dnf install nodejs -y
 
-  app_prereq
+
   aritfact_download
   cd /app
 
@@ -49,7 +49,7 @@ maven_app_setup(){
   print_head Install Maven
   dnf install maven -y
 
-  app_prereq
+
   aritfact_download
   cd /app
 
@@ -64,7 +64,7 @@ python_app_setup(){
   print_head Install Python Packages
   dnf install python3 gcc python3-devel -y
 
-  app_prereq
+
   aritfact_download
   cd /app
 
@@ -77,7 +77,7 @@ go_app_setup(){
   print_head Install GoLang Packages
   dnf install golang -y
 
-  app_prereq
+
   aritfact_download
   cd /app
   print_head Intitialize Go Component
