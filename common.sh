@@ -131,6 +131,14 @@ exit_status_print()
     echo -e "\e[32m >>SUCCESS\e[0m"
   else
     echo -e "\e[31m FAILURE\e[0m"
+    #Extracting the line number where it failed
+    lno=$(cat -n  /tmp/roboshop.log  | grep '#################################################' | tail -n 2  | head -n 1 | awk '{print $1}')
+    echo
+    echo
+    #Printing the error Message
+    sed -n -e "$lno,$ p" /tmp/roboshop.log
+    echo
+
     exit 1
   fi
 
